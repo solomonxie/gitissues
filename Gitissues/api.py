@@ -11,16 +11,20 @@ Description:
 
 import requests
 
+
 class API:
     """
         Be the Root parent class for all the children class like repo, issue, comment
     """
+
     def __init__(self):
         pass
 
     def request_api(self, url):
         r = self.__request(url)
-        print('Remain {} requests limit in this hour.'.format(self.get_remain_limits(r)))
+        print(
+            'Remain {} requests limit in this hour.'.format(
+                self.get_remain_limits(r)))
         pass
 
     def get_remain_limits(self, resp):
@@ -34,15 +38,16 @@ class API:
         """
         pass
 
-
     def __request(self, url):
         try:
             r = requests.get(url, timeout=5)
             if r.status_code is not 200:
-                print('Failed on fetching {} due to unexpected response'.format(url))
+                print(
+                    'Failed on fetching {} due to unexpected response'.format(url))
                 r = None
         except Exception:
-            print('Mission aborted.\nAn error occured when requesting:\n{}\n'.format(url))
+            print(
+                'Mission aborted.\nAn error occured when requesting:\n{}\n'.format(url))
             r = None
         return r
 

@@ -11,6 +11,7 @@ Class:
     - Comment
 """
 
+
 def main():
     url = 'https://github.com/solomonxie/solomonxie.github.io/issues/50#issuecomment-418060445'
     cmt = Comment(url)

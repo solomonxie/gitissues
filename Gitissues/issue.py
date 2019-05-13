@@ -10,6 +10,7 @@ Class:
     - Issue
 """
 
+
 def main():
     pass
 
@@ -20,7 +21,6 @@ class Issue:
 
     def __init__(self, url):
         pass
-
 
 
 if __name__ == '__main__':
