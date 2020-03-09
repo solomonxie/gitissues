@@ -20,4 +20,4 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 COPY . /Gitissues
 RUN python3 -m pip install --no-cache-dir -r /Gitissues/requirements.txt
 
-CMD "/init.sh"
+CMD "/run.sh"
