@@ -1,8 +1,8 @@
 build:
-	# docker build -t --squash solomonxie/gitissues-docker:latest .
-	docker-compose build .
+	docker build -t --squash solomonxie/gitissues-docker:latest .
+	# docker-compose build .
 
 run:
 	docker run -dt --name gitissues --restart always \
-		-e TOKEN=${TOKEN} \
+		-v ~/.ssh:/root/.ssh -e TOKEN=${TOKEN} \
 		solomonxie/gitissues-docker:latest
