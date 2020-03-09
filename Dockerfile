@@ -6,7 +6,7 @@ RUN apk add --no-cache git
 
 # Setup for ssh onto github
 COPY init.sh /init.sh
-RUN chmod 700 /init.sh
+RUN chmod 777 /init.sh
 RUN mkdir -p /root/.ssh
 # RUN echo "${ID_RSA}" > /root/.ssh/id_rsa \
 # RUN echo "${ID_RSA_PUB}" > /root/.ssh/id_rsa.pub
