@@ -19,4 +19,4 @@ COPY . /Gitissues
 RUN python3 -m pip install --no-cache-dir -r /Gitissues/requirements.txt
 
 # CMD "python3 /Gitissues/all_in_one.py 2>&1"
-CMD "/Gitissues/init.sh"
+CMD "/init.sh"
