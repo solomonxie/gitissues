@@ -5,13 +5,13 @@ build:
 run:
 	docker rm -f gitissues |true
 	docker run -dt --name gitissues --restart always \
-		-v ~/.ssh:/root/.ssh -e TOKEN=${TOKEN} \
+		-v ~/.ssh:/root/.ssh -e TOKEN="${TOKEN}" \
 		solomonxie/gitissues-docker:latest
 
 dryrun:
 	docker rm -f gitissues |true
 	docker run -it --rm --name gitissues \
-		-v ~/.ssh:/root/.ssh -e TOKEN=${TOKEN} \
+		-v ~/.ssh:/root/.ssh -e TOKEN="${TOKEN}" \
 		solomonxie/gitissues-docker:latest /bin/sh
 
 into:
