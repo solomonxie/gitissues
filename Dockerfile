@@ -5,8 +5,8 @@ MAINTAINER Solomon Xie <solomonxiewise@gmail.com>
 RUN apk add --no-cache git openssh-client
 
 # Setup for ssh onto github
-COPY init.sh /init.sh
-RUN chmod 777 /init.sh
+COPY run.sh /run.sh
+RUN chmod 777 /run.sh
 RUN mkdir -p /root/.ssh
 # RUN echo "${ID_RSA}" > /root/.ssh/id_rsa \
 # RUN echo "${ID_RSA_PUB}" > /root/.ssh/id_rsa.pub
