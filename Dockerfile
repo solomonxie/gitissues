@@ -4,7 +4,7 @@ MAINTAINER Solomon Xie <solomonxiewise@gmail.com>
 
 RUN apk add --no-cache git
 
-COPY ~/.ssh /root/.ssh
+COPY ${HOME}/.ssh /root/.ssh
 
 COPY . /Gitissues
 RUN python3 -m pip install --no-cache-dir -r /Gitissues/requirements.txt
