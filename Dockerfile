@@ -2,7 +2,7 @@ FROM python:3-alpine
 
 MAINTAINER Solomon Xie <solomonxiewise@gmail.com>
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git openssh
 
 # Setup for ssh onto github
 COPY init.sh /init.sh
