@@ -3,9 +3,5 @@ services:
     app:
         build: .
         image: solomonxie/gitissues-docker:latest
-        secrets:
-        - host_ssh_key
-
-secrets:
-    host_ssh_key:
-        file: ~/.ssh/id_rsa
+        volumes:
+            - ~/.ssh:/root/.ssh
