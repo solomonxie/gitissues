@@ -3,6 +3,7 @@ build:
 	# docker-compose build .
 
 run:
-	docker run -dt --name gitissues --restart always \
+	docker rm -f gitissues |true
+	docker run -it --name gitissues --restart always \
 		-v ~/.ssh:/root/.ssh -e TOKEN=${TOKEN} \
-		solomonxie/gitissues-docker:latest
+		solomonxie/gitissues-docker:latest /bin/sh
