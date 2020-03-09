@@ -9,6 +9,7 @@ run:
 		solomonxie/gitissues-docker:latest
 
 dryrun:
+	docker rm -f gitissues |true
 	docker run -it --rm --name gitissues \
 		-v ~/.ssh:/root/.ssh -e TOKEN=${TOKEN} \
 		solomonxie/gitissues-docker:latest /bin/sh
