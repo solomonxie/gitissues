@@ -1,4 +1,11 @@
 version: '3'
 services:
     app:
-      build: .
+        build: .
+        image: solomonxie/gitissues-docker:latest
+        secrets:
+        - host_ssh_key
+
+secrets:
+    host_ssh_key:
+        file: ~/.ssh/id_rsa

@@ -1,5 +1,5 @@
 build:
-	docker build -t solomonxie/gitissues-docker:latest .
+	docker build -t --squash solomonxie/gitissues-docker:latest .
 
 run:
 	docker run -dt --name gitissues --restart always \
