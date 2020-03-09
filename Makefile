@@ -4,6 +4,6 @@ build:
 
 run:
 	docker rm -f gitissues |true
-	docker run -it --name gitissues --restart always \
+	docker run -dt --name gitissues --restart always \
 		-v ~/.ssh:/root/.ssh -e TOKEN=${TOKEN} \
-		solomonxie/gitissues-docker:latest /bin/sh
+		solomonxie/gitissues-docker:latest
