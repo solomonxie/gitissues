@@ -26,7 +26,7 @@ def init_bak_repo():
     if os.path.exists(os.path.join(ROOT, '.git')):
         return
     # raise Exception('Not a git repo for backup: {}'.format(os.path.abspath(ROOT)))
-    p = os.popen('git clone --depth 1 {BAK_REPO} {ROOT} 2>&1')
+    p = os.popen(f'git clone --depth 1 {BAK_REPO} {ROOT} 2>&1')
     logger.critical(p.read())
 
 
