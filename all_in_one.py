@@ -11,6 +11,7 @@ USER = os.environ.get('GITHUB_USER') or 'solomonxie'
 REPO = os.environ.get('GITHUB_REPO') or 'solomonxie.github.io'
 BAK_REPO = os.environ.get('GITHUB_REPO') or 'git@github.com:solomonxie/issues_blog.git'
 HEADERS = {'Authorization': 'token ' + os.environ['TOKEN']}
+assert os.environ['TOKEN'] is not None
 
 ISSUES_URL = f'https://api.github.com/repos/{USER}/{REPO}/issues'
 ROOT = os.environ.get('BAK_ROOT') or '/tmp'
