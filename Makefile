@@ -19,4 +19,4 @@ into:
 
 
 run:
-	python3 /Gitissues/all_in_one.py 2>&1
+	python3 /Gitissues/all_in_one.py 2>&1 >> /info.log
