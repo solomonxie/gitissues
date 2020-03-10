@@ -4,7 +4,7 @@ MAINTAINER Solomon Xie <solomonxiewise@gmail.com>
 RUN apk add --no-cache git openssh-client
 
 # Install requirements
-COPY . /Gitissues
+VOLUME /Gitissues
 RUN python3 -m pip install --no-cache-dir -r /Gitissues/requirements.txt
 
 ARG ID_RSA
@@ -17,6 +17,8 @@ RUN echo "${ID_RSA_PUB}" > /root/.ssh/id_rsa.pub && chmod 700 /root/.ssh/id_rsa.
 # Setup for ssh onto github
 ARG GITHUB_TOKEN
 RUN echo "${GITHUB_TOKEN}" > /github_token.txt && chmod 700 /github_token.txt
+ARG GITHUB_CFG
+RUN echo "${GITHUB_CFG}" > /root/.gitconfig
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts

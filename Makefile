@@ -2,7 +2,8 @@ build:
 	docker build . -t solomonxie/gitissues-docker:latest \
 		--build-arg ID_RSA="`cat ~/.ssh/id_rsa`" \
 		--build-arg ID_RSA_PUB="`cat ~/.ssh/id_rsa.pub`" \
-		--build-arg GITHUB_TOKEN="`cat ~/.ssh/github_token.txt`"
+		--build-arg GITHUB_TOKEN="`cat ~/.ssh/github_token.txt`" \
+		--build-arg GITHUB_CFG="`cat ~/.gitconfig`"
 
 up:
 	docker rm -f gitissues |true
