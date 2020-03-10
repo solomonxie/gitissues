@@ -4,8 +4,8 @@ MAINTAINER Solomon Xie <solomonxiewise@gmail.com>
 RUN apk add --no-cache git openssh-client
 
 # Install requirements
-VOLUME /Gitissues
-RUN python3 -m pip install --no-cache-dir -r /Gitissues/requirements.txt
+COPY requirements.txt /requirements.txt
+RUN python3 -m pip install --no-cache-dir -r /requirements.txt
 
 ARG ID_RSA
 ARG ID_RSA_PUB
@@ -31,4 +31,5 @@ RUN /usr/bin/crontab /crontab.txt
 COPY entry.sh /entry.sh
 RUN chmod 755 /entry.sh
 
+VOLUME /Gitissues
 CMD ["/entry.sh"]
