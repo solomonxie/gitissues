@@ -33,4 +33,3 @@ COPY entry.sh /entry.sh
 RUN chmod 755 /entry.sh
 
 VOLUME /Gitissues
-CMD ["/entry.sh"]
