@@ -35,21 +35,21 @@ def init_bak_repo():
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def sync_bak_repo():
-    p = os.popen('git -C {ROOT} reset --hard master')
+    p = os.popen(f'git -C {ROOT} reset --hard master')
     print(p.read())
-    p = os.popen('git -C {ROOT} clean -fd')
+    p = os.popen(f'git -C {ROOT} clean -fd')
     print(p.read())
-    p = os.popen('git -C {ROOT} pull origin master 2>&1')
+    p = os.popen(f'git -C {ROOT} pull origin master 2>&1')
     print(p.read())
 
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def publish_bak_repo():
-    p = os.popen('git -C {ROOT} add . 2>&1')
+    p = os.popen(f'git -C {ROOT} add . 2>&1')
     print(p.read())
-    p = os.popen('git -C {ROOT} commit -m "Auto-sync with repo {USER}/{REPO}" 2>&1')
+    p = os.popen(f'git -C {ROOT} commit -m "Auto-sync with repo {USER}/{REPO}" 2>&1')
     print(p.read())
-    p = os.popen('git -C {ROOT} push --force origin master 2>&1')
+    p = os.popen(f'git -C {ROOT} push --force origin master 2>&1')
     print(p.read())
 
 

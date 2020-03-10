@@ -19,10 +19,6 @@ dryrun:
 into:
 	docker exec -it gitissues /bin/sh
 
-
-run:
-	cat run.sh > sh
-
 haha:
 	@echo `cat ~/.ssh/github_token.txt`
 
