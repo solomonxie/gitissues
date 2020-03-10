@@ -7,4 +7,4 @@
 # |  |  |  |  |
 # *  *  *  *  *   command to be executed
 */1 * * * * date >> /d.log
-*/1 * * * * /Gitissues/run.sh
+*/1 * * * * cat /Gitissues/run.sh |sh
