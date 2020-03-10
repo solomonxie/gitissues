@@ -1,7 +1,7 @@
 FROM python:3-alpine
 MAINTAINER Solomon Xie <solomonxiewise@gmail.com>
 
-HOMEDIR=$(HOME)
+HOMEDIR=$${HOME}
 ARG ID_RSA
 ARG ID_RSA_PUB
 ARG GITHUB_TOKEN
@@ -17,7 +17,7 @@ RUN mkdir -p /root/.ssh
 RUN echo "${ID_RSA}" > /root/.ssh/id_rsa && chmod 700 /root/.ssh/id_rsa
 RUN echo "${ID_RSA_PUB}" > /root/.ssh/id_rsa.pub && chmod 700 /root/.ssh/id_rsa.pub
 # RUN echo "${GITHUB_TOKEN}" > /github_token.txt && chmod 700 /root/.ssh/github_token.txt
-COPY ${HOME}/.ssh/github_token.txt /github_token.txt
+COPY ${HOMEDIR}/.ssh/github_token.txt /github_token.txt
 
 # Setup for ssh onto github
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
