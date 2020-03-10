@@ -13,6 +13,10 @@ up:
 		-v ~/Gitissues:/Gitissues -e TOKEN="${TOKEN}" \
 		solomonxie/gitissues-docker:latest
 
+run:
+	docker exec -it gitissues /entry.sh
+
+
 dryrun:
 	docker rm -f gitissues |true
 	docker run -it --rm --name gitissues \

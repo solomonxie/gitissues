@@ -35,4 +35,3 @@ COPY run.sh /run.sh
 RUN chmod 755 /run.sh
 
 VOLUME /Gitissues
-CMD ["/entry.sh"]
