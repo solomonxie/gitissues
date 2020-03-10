@@ -26,6 +26,7 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 # Add cronjob
 ADD crontab.txt /crontab.txt
 RUN /usr/bin/crontab /crontab.txt
+RUN /usr/sbin/crond -fd 0 >> /tmp/cron.log 2>&1 &
 
 # Add entry
 COPY entry.sh /entry.sh
