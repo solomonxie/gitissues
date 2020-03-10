@@ -1,6 +1,3 @@
-ha:
-	@echo `cat ~/.ssh/github_token.txt`
-
 build:
 	docker build . -t solomonxie/gitissues-docker:latest \
 		--build-arg ID_RSA="`cat ~/.ssh/id_rsa`" \
@@ -25,3 +22,7 @@ into:
 
 run:
 	python3 all_in_one.py 2>&1 >> /info.log
+
+haha:
+	@echo `cat ~/.ssh/github_token.txt`
+
