@@ -31,5 +31,7 @@ ADD crontab.txt /crontab.txt
 # Add entry
 COPY entry.sh /entry.sh
 RUN chmod 755 /entry.sh
+COPY run.sh /run.sh
+RUN chmod 755 /run.sh
 
 VOLUME /Gitissues
