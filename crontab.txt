@@ -1,1 +1,1 @@
-*/30 * * * * TOKEN="$(cat /github_token.txt)" python3 /Gitissues/all_in_one.py
+*/5 * * * * /Gitissues/run.sh

@@ -21,7 +21,7 @@ into:
 
 
 run:
-	python3 all_in_one.py 2>&1 >> /info.log
+	TOKEN="$(cat /github_token.txt)" python3 /Gitissues/all_in_one.py 2>&1 >> /info.log
 
 haha:
 	@echo `cat ~/.ssh/github_token.txt`
