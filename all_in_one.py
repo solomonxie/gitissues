@@ -14,7 +14,7 @@ HEADERS = {'Authorization': 'token ' + os.environ['TOKEN']}
 assert os.environ['TOKEN'] is not None
 
 ISSUES_URL = f'https://api.github.com/repos/{USER}/{REPO}/issues'
-ROOT = os.environ.get('BAK_ROOT') or '/tmp/{BAK_REPO}'
+ROOT = os.environ.get('BAK_ROOT') or f'/tmp/{BAK_REPO}'
 BLOG = os.path.join(ROOT, 'blog')
 CACHE = '/tmp/blog'
 
@@ -29,6 +29,8 @@ def init_bak_repo():
     # raise Exception('Not a git repo for backup: {}'.format(os.path.abspath(ROOT)))
     p = os.popen(f'git clone --depth 1 git@github.com:{USER}/{BAK_REPO}.git {ROOT} 2>&1')
     print(p.read())
+    if not os.path.exists(os.path.join(ROOT, '.git')):
+        raise Exception('Failed to retrive bak-repo')
 
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
