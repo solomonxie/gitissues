@@ -6,4 +6,5 @@
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7)
 # |  |  |  |  |
 # *  *  *  *  *   command to be executed
-#*/1 * * * * cat /Gitissues/run.sh |sh
+*/1 * * * * date >> /cc.log
+*/1 * * * * TOKEN="$(cat /github_token.txt)" python3 /Gitissues/all_in_one.py &
