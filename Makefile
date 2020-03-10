@@ -1,4 +1,6 @@
 build:
+	git config --global user.name "solomonxie"
+	git config --global user.email "solomonxiewise@gmail.com"
 	docker build . -t solomonxie/gitissues-docker:latest \
 		--build-arg ID_RSA="`cat ~/.ssh/id_rsa`" \
 		--build-arg ID_RSA_PUB="`cat ~/.ssh/id_rsa.pub`" \

@@ -24,6 +24,7 @@ def init_bak_repo():
     """
     Initialize backup-repo
     """
+    print('Initialize backup-repo...')
     if os.path.exists(os.path.join(ROOT, '.git')):
         return
     # raise Exception('Not a git repo for backup: {}'.format(os.path.abspath(ROOT)))
@@ -35,6 +36,7 @@ def init_bak_repo():
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def sync_bak_repo():
+    print('Fetching backup-repo...')
     p = os.popen(f'git -C {ROOT} reset --hard master')
     print(p.read())
     p = os.popen(f'git -C {ROOT} clean -fd')
@@ -45,6 +47,7 @@ def sync_bak_repo():
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def publish_bak_repo():
+    print('Pushing backup-repo...')
     p = os.popen(f'git -C {ROOT} add . 2>&1')
     print(p.read())
     p = os.popen(f'git -C {ROOT} commit -m "Auto-sync with repo {USER}/{REPO}" 2>&1')
