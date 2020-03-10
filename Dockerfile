@@ -20,6 +20,7 @@ RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 # Add cronjob
+ADD crontab.txt /crontab.txt
 RUN /usr/bin/crontab /crontab.txt
 
 # Add entry
