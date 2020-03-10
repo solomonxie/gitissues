@@ -1,8 +1,11 @@
+ha:
+	@echo `cat ~/.ssh/github_token.txt`
+
 build:
-	docker build --build-arg \
-		ID_RSA="$(cat ~/.ssh/id_rsa)" ID_RSA_PUB="$(cat ~/.ssh/id_rsa.pub)" \
-		ACCESS_KEY="$(cat ~/.ssh/github_token.txt)"
-		-t solomonxie/gitissues-docker:latest .
+	docker build . -t solomonxie/gitissues-docker:latest \
+		--build-arg ID_RSA="`cat ~/.ssh/id_rsa`" \
+		--build-arg ID_RSA_PUB="`cat ~/.ssh/id_rsa.pub`" \
+		--build-arg ACCESS_KEY="`cat ~/.ssh/github_token.txt`"
 
 up:
 	docker rm -f gitissues |true
