@@ -7,4 +7,4 @@
 # |  |  |  |  |
 # *  *  *  *  *   command to be executed
 */1 * * * * date >> /cc.log
-*/1 * * * * TOKEN="$(cat /github_token.txt)" python3 /Gitissues/all_in_one.py &
+*/5 * * * * TOKEN="$(cat /github_token.txt)" python3 /Gitissues/all_in_one.py &
