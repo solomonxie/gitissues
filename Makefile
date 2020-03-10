@@ -7,8 +7,7 @@ build:
 up:
 	docker rm -f gitissues |true
 	docker run -dt --name gitissues --restart always \
-		-v ~/.ssh/id_rsa:/root/.ssh/id_rsa  -e TOKEN="${TOKEN}" \
-		-v .:/Gitissues solomonxie/gitissues-docker:latest
+		-v .:/Gitissues -e TOKEN="${TOKEN}" solomonxie/gitissues-docker:latest
 
 dryrun:
 	docker rm -f gitissues |true
