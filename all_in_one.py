@@ -9,12 +9,12 @@ import shutil
 
 USER = os.environ.get('GITHUB_USER') or 'solomonxie'
 REPO = os.environ.get('GITHUB_REPO') or 'solomonxie.github.io'
-BAK_REPO = os.environ.get('GITHUB_REPO') or 'git@github.com:solomonxie/issues_blog.git'
+BAK_REPO = os.environ.get('GITHUB_REPO') or 'issues_blog'
 HEADERS = {'Authorization': 'token ' + os.environ['TOKEN']}
 assert os.environ['TOKEN'] is not None
 
 ISSUES_URL = f'https://api.github.com/repos/{USER}/{REPO}/issues'
-ROOT = os.environ.get('BAK_ROOT') or '/tmp'
+ROOT = os.environ.get('BAK_ROOT') or '/tmp/{BAK_REPO}'
 BLOG = os.path.join(ROOT, 'blog')
 CACHE = '/tmp/blog'
 
@@ -27,7 +27,7 @@ def init_bak_repo():
     if os.path.exists(os.path.join(ROOT, '.git')):
         return
     # raise Exception('Not a git repo for backup: {}'.format(os.path.abspath(ROOT)))
-    p = os.popen(f'git clone --depth 1 {BAK_REPO} {ROOT} 2>&1')
+    p = os.popen(f'git clone --depth 1 git@github.com:{USER}/{BAK_REPO}.git {ROOT} 2>&1')
     print(p.read())
 
 
