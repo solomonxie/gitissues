@@ -4,9 +4,11 @@ MAINTAINER Solomon Xie <solomonxiewise@gmail.com>
 
 RUN apk add --no-cache git openssh-client
 
+# Install requirements
+COPY . /Gitissues
+RUN python3 -m pip install --no-cache-dir -r /Gitissues/requirements.txt
+
 # Setup for ssh onto github
-COPY main.sh /main.sh
-RUN chmod 777 /main.sh
 RUN mkdir -p /root/.ssh
 # RUN echo "${ID_RSA}" > /root/.ssh/id_rsa \
 # RUN echo "${ID_RSA_PUB}" > /root/.ssh/id_rsa.pub
@@ -17,7 +19,11 @@ RUN touch /root/.ssh/known_hosts
 # Add github key
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-COPY . /Gitissues
-RUN python3 -m pip install --no-cache-dir -r /Gitissues/requirements.txt
+# Add cronjob
+RUN /usr/bin/crontab /crontab.txt
 
-CMD "/main.sh"
+# Add entry
+COPY entry.sh /entry.sh
+RUN chmod 755 /entry.sh
+
+CMD ["/entry.sh"]

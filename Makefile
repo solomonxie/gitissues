@@ -2,7 +2,7 @@ build:
 	docker build -t solomonxie/gitissues-docker:latest .
 	# docker-compose build .
 
-run:
+up:
 	docker rm -f gitissues |true
 	docker run -dt --name gitissues --restart always \
 		-v ~/.ssh:/root/.ssh -e TOKEN="${TOKEN}" \
@@ -16,3 +16,7 @@ dryrun:
 
 into:
 	docker exec -it gitissues /bin/sh
+
+
+run:
+	python3 /Gitissues/all_in_one.py 2>&1
