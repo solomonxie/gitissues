@@ -1,1 +1,1 @@
-*/30 * * * * cd /Gitissues && make run
+*/30 * * * * TOKEN="$(cat /github_token.txt)" python3 /Gitissues/all_in_one.py

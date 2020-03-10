@@ -1,6 +1,8 @@
 build:
-	docker build -t solomonxie/gitissues-docker:latest .
-	# docker-compose build .
+	docker build --build-arg \
+		ID_RSA="$(cat ~/.ssh/id_rsa)" ID_RSA_PUB="$(cat ~/.ssh/id_rsa.pub)" \
+		ACCESS_KEY="$(cat ~/.ssh/github_token.txt)"
+		-t solomonxie/gitissues-docker:latest .
 
 up:
 	docker rm -f gitissues |true
@@ -19,4 +21,4 @@ into:
 
 
 run:
-	python3 /Gitissues/all_in_one.py 2>&1 >> /info.log
+	python3 all_in_one.py 2>&1 >> /info.log
