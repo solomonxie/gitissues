@@ -96,7 +96,7 @@ def save_comment(issue, comment):
 
     with open(path, 'w') as f:
         f.write(comment['body'] + '\n')
-    print('\t Saved a comment to: ' + path)
+    # print('\t Saved a comment to: ' + path)
     return path
 
 
