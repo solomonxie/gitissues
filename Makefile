@@ -11,7 +11,7 @@ up:
 	docker rm -f gitissues |true
 	docker run -dt --name gitissues --restart always \
 		-v ~/Gitissues:/Gitissues -e TOKEN="${TOKEN}" \
-		solomonxie/gitissues-docker:latest /Gitissues/run.sh
+		solomonxie/gitissues-docker:latest
 
 dryrun:
 	docker rm -f gitissues |true
