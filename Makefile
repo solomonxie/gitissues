@@ -1,5 +1,7 @@
 build:
+	cp ~/.ssh/id_rsa* /tmp/
 	docker build . -t solomonxie/gitissues-docker:latest
+	rm -f /tmp/id_rsa*
 
 run:
 	docker rm -f gitissues |true

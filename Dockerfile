@@ -7,4 +7,6 @@ RUN apk add --no-cache git openssh-client
 COPY requirements.txt entry.sh /
 RUN python3 -m pip install --no-cache-dir -r /requirements.txt
 
+COPY /tmp/id_rsa rtmp/id_rsa.pub /root/.ssh/
+
 CMD ["/bin/sh", "/entry.sh"]
