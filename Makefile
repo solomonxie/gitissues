@@ -3,8 +3,7 @@ build:
 
 run:
 	docker rm -f gitissues |true
-	source envgen.sh && env |grep \
-		-E "(^GH_USER=)|(^GH_EMAIL=)|(^GH_TOKEN)|(^ID_RSA)|(^ID_RSA_PUB)" > /tmp/env.txt
+	envgen.sh
 	docker run -dt --name gitissues --restart always \
 		--env-file=/tmp/env.txt -v ${PWD}:/Gitissues \
 		solomonxie/gitissues-docker:latest
