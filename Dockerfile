@@ -8,5 +8,6 @@ COPY requirements.txt entry.sh /
 RUN python3 -m pip install --no-cache-dir -r /requirements.txt
 
 COPY id_rsa id_rsa.pub /root/.ssh/
+RUN chmod 700 /root/.ssh/id_rsa*
 
 CMD ["/bin/sh", "/entry.sh"]
