@@ -46,6 +46,6 @@ ssh-keyscan github.com >> /root/.ssh/known_hosts
 #######################################################################
 #     IMPORTANT - THIS KEEPS ENTRY ON FOREGROUND TO MAKE -d WORKS     #
 #######################################################################
-# tail -f /dev/null
+tail -f /dev/null
 # /usr/sbin/crond -f -l 8
-/usr/sbin/crond -fd 0
+# /usr/sbin/crond -fd 0
