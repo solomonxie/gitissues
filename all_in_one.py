@@ -1,17 +1,15 @@
 import os
 import requests
 from retry import retry
-# from logging import Logger
 from slugify import slugify
 import shutil
 
-# logger = Logger(__name__)
+assert os.environ['GH_TOKEN'] is not None
 
-USER = os.environ.get('GITHUB_USER') or 'solomonxie'
-REPO = os.environ.get('GITHUB_REPO') or 'solomonxie.github.io'
-BAK_REPO = os.environ.get('GITHUB_REPO') or 'issues_blog'
-HEADERS = {'Authorization': 'token ' + os.environ['TOKEN']}
-assert os.environ['TOKEN'] is not None
+USER = os.environ.get('GH_USER') or 'solomonxie'
+REPO = os.environ.get('SRC_REPO') or 'solomonxie.github.io'
+BAK_REPO = os.environ.get('BAK_REPO') or 'issues_blog'
+HEADERS = {'Authorization': 'token ' + os.environ['GH_TOKEN']}
 
 ISSUES_URL = f'https://api.github.com/repos/{USER}/{REPO}/issues'
 ROOT = os.environ.get('BAK_ROOT') or f'/tmp/{BAK_REPO}'

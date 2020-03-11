@@ -1,27 +1,14 @@
 build:
-	git config --global user.name "solomonxie"
-	git config --global user.email "solomonxiewise@gmail.com"
-	docker build . -t solomonxie/gitissues-docker:latest \
-		--build-arg ID_RSA="`cat ~/.ssh/id_rsa`" \
-		--build-arg ID_RSA_PUB="`cat ~/.ssh/id_rsa.pub`" \
-		--build-arg GITHUB_TOKEN="`cat ~/.ssh/github_token.txt`" \
-		--build-arg GITHUB_CFG="`cat ~/.gitconfig`"
-
-up:
-	docker rm -f gitissues |true
-	docker run -dt --name gitissues --restart always \
-		-v ~/Gitissues:/Gitissues -e TOKEN="${TOKEN}" \
-		solomonxie/gitissues-docker:latest
+	docker build . -t solomonxie/gitissues-docker:latest
 
 run:
-	docker exec -it gitissues /entry.sh
-
-
-dryrun:
 	docker rm -f gitissues |true
-	docker run -it --rm --name gitissues \
-		-v ~/.ssh:/root/.ssh -e TOKEN="${TOKEN}" \
-		solomonxie/gitissues-docker:latest /bin/sh
+	source envgen.sh && env |grep \
+		-E "(^GH_USER=)|(^GH_EMAIL=)|(^GH_TOKEN)|(^ID_RSA)|(^ID_RSA_PUB)" > /tmp/env.txt
+	docker run -dt --name gitissues --restart always \
+		--env-file=/tmp/env.txt -v ${PWD}:/Gitissues \
+		solomonxie/gitissues-docker:latest
+	rm /tmp/env.txt
 
 into:
 	docker exec -it gitissues /bin/sh
