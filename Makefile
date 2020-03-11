@@ -3,7 +3,7 @@ build:
 
 run:
 	docker rm -f gitissues |true
-	envgen.sh
+	sh envgen.sh
 	docker run -dt --name gitissues --restart always \
 		--env-file=/tmp/env.txt -v ${PWD}:/Gitissues \
 		solomonxie/gitissues-docker:latest
