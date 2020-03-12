@@ -60,7 +60,7 @@ def publish_bak_repo():
     print(f'Changed files: {changed_files}')
     for i, fname in enumerate(changed_files):
         with open(os.path.join(ROOT, fname), 'r') as f:
-            changed_titles.append(f'[ {i+1} ] ' + f.read()[:10])
+            changed_titles.append(f'[ {i+1} ] ' + f.read()[:20])
     commit_msg = '...; '.join(changed_titles)
 
     print('Pushing backup-repo...')
