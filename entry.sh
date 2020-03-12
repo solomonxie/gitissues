@@ -4,9 +4,7 @@
 #######################################################################
 
 # ENV check: requires specific Environment variables
-if [ "${ID_RSA}" == "" ] || \
-   [ "${ID_RSA_PUB}" == "" ] || \
-   [ "${GH_USER}" == "" ] || \
+if [ "${GH_USER}" == "" ] || \
    [ "${GH_EMAIL}" == "" ] || \
    [ "${GH_TOKEN}" == "" ] || \
    false;
