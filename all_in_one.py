@@ -46,12 +46,20 @@ def sync_bak_repo():
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def publish_bak_repo():
+    # Remove existing blog folder (much easier than diff)
+    if os.path.exists(BLOG):
+        shutil.rmtree(BLOG)
+        print('Removed existing folder: ' + BLOG)
+    # Move newly retrieved files from cache to backup folder
+    shutil.move(CACHE, BLOG)
+    print('Replaced existing files with newly retrieved files')
+
     print('Pushing backup-repo...')
-    p = os.popen(f'git -C {ROOT} add . 2>&1')
+    p = os.popen(f'git -C {ROOT} add {ROOT}')
     print(p.read())
-    p = os.popen(f'git -C {ROOT} commit -m "Auto-sync with repo {USER}/{REPO}" 2>&1')
+    p = os.popen(f'git -C {ROOT} commit -am "Auto-sync with repo {USER}/{REPO}"')
     print(p.read())
-    p = os.popen(f'git -C {ROOT} push --force origin master 2>&1')
+    p = os.popen(f'git -C {ROOT} push --force origin master')
     print(p.read())
 
 
@@ -70,7 +78,7 @@ def download_issues():
 def download_comments(issue):
     resp = requests.get(issue['comments_url'], headers=HEADERS)
     comment_list = resp.json()
-    print(f'Retrived {len(comment_list)} comments')
+    print(f'Retrived {len(comment_list)} comments of issue[{issue["number"]}]')
     for comment in comment_list:
         save_comment(issue, comment)
 
@@ -108,16 +116,6 @@ def main():
         download_comments(issue)
     print('Finished downloading.')
 
-    # Remove existing blog folder (much easier than diff)
-    if os.path.exists(BLOG):
-        shutil.rmtree(BLOG)
-        print('Removed existing folder: ' + BLOG)
-
-    # Move newly retrieved files from cache to backup folder
-    shutil.move(CACHE, BLOG)
-    print('Replaced existing files with newly retrieved files')
-
-    # Update Git backup-repo
     sync_bak_repo()
     publish_bak_repo()
 

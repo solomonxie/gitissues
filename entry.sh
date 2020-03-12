@@ -22,8 +22,6 @@ mkdir -p /root/.ssh
 # chmod 700 /root/.ssh/id_rsa
 # chmod 700 /root/.ssh/id_rsa.pub
 
-echo "${GH_TOKEN}" > /github_token.txt
-
 # Set github user for commit
 git config --global user.name "${GH_USER}"
 git config --global user.email "${GH_EMAIL}"
