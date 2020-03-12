@@ -54,13 +54,18 @@ def publish_bak_repo():
     shutil.move(CACHE, BLOG)
     print('Replaced existing files with newly retrieved files')
 
+    changed_titles = []
     p = os.popen(f'git -C {ROOT} diff --name-only |cat')
-    changed_files = p.read()
+    changed_files = p.read().split()
+    for i, fname in enumerate(changed_files):
+        with open(os.path.join(ROOT, fname), 'r') as f:
+            changed_titles.append(f'[ {i+1} ] ' + f.read()[:10])
+    commit_msg = '...; '.join(changed_titles)
 
     print('Pushing backup-repo...')
     p = os.popen(f'git -C {ROOT} add {ROOT}')
     print(p.read())
-    p = os.popen(f'git -C {ROOT} commit -am "Updated: {changed_files}"')
+    p = os.popen(f'git -C {ROOT} commit -am "Updated: {commit_msg}"')
     print(p.read())
     p = os.popen(f'git -C {ROOT} push --force origin master')
     print(p.read())
@@ -94,7 +99,7 @@ def save_issue_body(issue):
 
     with open(path, 'w') as f:
         f.write(issue['body'] + '\n')
-    print('\t Saved an issue to: ' + path)
+    # print('\t Saved an issue to: ' + path)
     return path
 
 
