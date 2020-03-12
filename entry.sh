@@ -5,6 +5,7 @@
 
 # ENV check: requires specific Environment variables
 if [ "${GH_USER}" == "" ] || \
+   [ "${GH_NAME}" == "" ] || \
    [ "${GH_EMAIL}" == "" ] || \
    [ "${GH_TOKEN}" == "" ] || \
    false;
@@ -16,10 +17,10 @@ fi
 mkdir -p /root/.ssh
 
 # Copy ssh-keys from host
-echo "${ID_RSA}" > /root/.ssh/id_rsa
-echo "${ID_RSA_PUB}" > /root/.ssh/id_rsa.pub
-chmod 700 /root/.ssh/id_rsa
-chmod 700 /root/.ssh/id_rsa.pub
+# echo "${ID_RSA}" > /root/.ssh/id_rsa
+# echo "${ID_RSA_PUB}" > /root/.ssh/id_rsa.pub
+# chmod 700 /root/.ssh/id_rsa
+# chmod 700 /root/.ssh/id_rsa.pub
 
 echo "${GH_TOKEN}" > /github_token.txt
 

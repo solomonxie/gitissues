@@ -26,7 +26,8 @@ def init_bak_repo():
     if os.path.exists(os.path.join(ROOT, '.git')):
         return
     # raise Exception('Not a git repo for backup: {}'.format(os.path.abspath(ROOT)))
-    p = os.popen(f'git clone --depth 1 git@github.com:{USER}/{BAK_REPO}.git {ROOT} 2>&1')
+    print(f'git clone --depth 1 git@github.com:{USER}/{BAK_REPO}.git {ROOT}')
+    p = os.popen(f'git clone --depth 1 git@github.com:{USER}/{BAK_REPO}.git {ROOT}')
     print(p.read())
     if not os.path.exists(os.path.join(ROOT, '.git')):
         raise Exception('Failed to retrive bak-repo')
