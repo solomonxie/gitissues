@@ -81,7 +81,7 @@ def download_issues():
 def download_comments(issue):
     resp = requests.get(issue['comments_url'], headers=HEADERS)
     comment_list = resp.json()
-    print(f'Retrived {len(comment_list)} comments of issue[{issue["number"]}]')
+    print(f'\t Retrived {len(comment_list)} comments of issue[{issue["number"]}]')
     for comment in comment_list:
         save_comment(issue, comment)
 
@@ -94,7 +94,7 @@ def save_issue_body(issue):
 
     with open(path, 'w') as f:
         f.write(issue['body'] + '\n')
-    print('Saved an issue to: ' + path)
+    print('\t Saved an issue to: ' + path)
     return path
 
 
