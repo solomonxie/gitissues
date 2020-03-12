@@ -46,7 +46,6 @@ def sync_bak_repo():
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def publish_bak_repo():
-    __import__('pdb').set_trace()
     print('Prepare to publish...')
     # Remove existing blog folder (much easier than diff)
     if os.path.exists(BLOG):
@@ -62,8 +61,8 @@ def publish_bak_repo():
     changed_files = p.read().split()
     print(f'Changed files: {changed_files}')
     for i, fname in enumerate(changed_files):
-        changed_titles.append(f'[ {i+1} ] ' + fname[:10])
-    commit_msg = '...; '.join(changed_titles)
+        changed_titles.append(f'[ {i+1} ] ' + fname[:20])
+    commit_msg = '...; '.join(changed_titles)[:30]
 
     print('Pushing backup-repo...')
     p = os.popen(f'git -C {ROOT} add {ROOT}')
