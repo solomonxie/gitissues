@@ -49,7 +49,7 @@ def publish_bak_repo():
     # Remove existing blog folder (much easier than diff)
     if os.path.exists(BLOG):
         shutil.rmtree(BLOG)
-        print('Removed existing folder: ' + BLOG)
+        # print('Removed existing folder: ' + BLOG)
     # Move newly retrieved files from cache to backup folder
     shutil.move(CACHE, BLOG)
     print('Replaced existing files with newly retrieved files')
@@ -57,6 +57,7 @@ def publish_bak_repo():
     changed_titles = []
     p = os.popen(f'git -C {ROOT} diff --name-only |cat')
     changed_files = p.read().split()
+    print(f'Changed files: {changed_files}')
     for i, fname in enumerate(changed_files):
         with open(os.path.join(ROOT, fname), 'r') as f:
             changed_titles.append(f'[ {i+1} ] ' + f.read()[:10])
@@ -85,9 +86,10 @@ def download_issues():
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def download_comments(issue):
     resp = requests.get(issue['comments_url'], headers=HEADERS)
-    comment_list = resp.json()
+    comment_list = list(resp.json())
     print(f'\t Retrived {len(comment_list)} comments of issue[{issue["number"]}]')
-    for comment in comment_list:
+    for i, comment in enumerate(sorted(comment_list, key=lambda x: x['id'])):
+        comment['number'] = i + 1
         save_comment(issue, comment)
 
 
@@ -104,7 +106,7 @@ def save_issue_body(issue):
 
 
 def save_comment(issue, comment):
-    comment['name'] = '{}-{}'.format(comment['id'], slugify(comment['body'][:30]))
+    comment['name'] = '{}-{}'.format(comment['number'], slugify(comment['body'][:20]))
     path = os.path.join(CACHE, issue['name'], comment['name'] + '.md')
     if not os.path.exists(os.path.dirname(path)):
         os.makedirs(os.path.dirname(path))
