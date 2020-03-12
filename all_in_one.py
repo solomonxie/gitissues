@@ -46,10 +46,13 @@ def sync_bak_repo():
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def publish_bak_repo():
+    __import__('pdb').set_trace()
+    print('Prepare to publish...')
     # Remove existing blog folder (much easier than diff)
     if os.path.exists(BLOG):
         shutil.rmtree(BLOG)
         # print('Removed existing folder: ' + BLOG)
+
     # Move newly retrieved files from cache to backup folder
     shutil.move(CACHE, BLOG)
     print('Replaced existing files with newly retrieved files')
@@ -59,8 +62,7 @@ def publish_bak_repo():
     changed_files = p.read().split()
     print(f'Changed files: {changed_files}')
     for i, fname in enumerate(changed_files):
-        with open(os.path.join(ROOT, fname), 'r') as f:
-            changed_titles.append(f'[ {i+1} ] ' + f.read()[:20])
+        changed_titles.append(f'[ {i+1} ] ' + fname[:10])
     commit_msg = '...; '.join(changed_titles)
 
     print('Pushing backup-repo...')
