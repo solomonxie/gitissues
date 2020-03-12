@@ -78,7 +78,7 @@ def publish_bak_repo():
 def download_issues():
     resp = requests.get(ISSUES_URL, headers=HEADERS)
     issue_list = resp.json()
-    print(f'Retrived {len(issue_list)} issues')
+    print(f'Will be retriving for {len(issue_list)} issues')
     for issue in issue_list:
         save_issue_body(issue)
 
@@ -97,6 +97,7 @@ def download_comments(issue):
 
 def save_issue_body(issue):
     issue['name'] = '{}-{}'.format(issue['number'], slugify(issue['title']))
+    print('{} last updated at {}'.format(issue['name'], issue['updated_at']))
     path = os.path.join(CACHE, issue['name'], 'README.md')
     if not os.path.exists(os.path.dirname(path)):
         os.makedirs(os.path.dirname(path))
