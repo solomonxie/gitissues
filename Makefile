@@ -13,7 +13,3 @@ run:
 
 into:
 	docker exec -it gitissues /bin/sh
-
-haha:
-	@echo `cat ~/.ssh/github_token.txt`
-

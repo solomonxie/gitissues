@@ -13,3 +13,10 @@ trending site generators like, Jekyll, Gitbooks, Readthedocs, Hugo nad Hexo.
 
 Master branch is for development (weird but convenient for personal use)
 Stable brances are as snapshots for properly working versions.
+
+
+## Docker Version
+
+```sh
+make build && make run && make into
+```
