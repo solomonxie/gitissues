@@ -8,3 +8,4 @@
 # *  *  *  *  *   command to be executed
 * * * * * date > /cc.log 2>&1
 */5 * * * * python3 /Gitissues/all_in_one.py > /info.log 2>&1
+*/1 * * * * git -C /Gitissues reset --hard HEAD && git -C /Gitissues clean -fd && git -C /Gitissues pull origin master
