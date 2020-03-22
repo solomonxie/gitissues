@@ -87,8 +87,14 @@ def download_issues():
 
 @retry((Exception, ), tries=3, delay=3, jitter=5)
 def download_comments(issue):
-    resp = requests.get(issue['comments_url'], headers=HEADERS)
-    comment_list = list(resp.json())
+    comment_list = []
+    base_url = issue['comments_url']
+    count, limit = issue['comments'], 30
+    pages = int((count + abs(count % limit - limit)) / limit)
+    # Pagination
+    for page in range(0, pages, limit):
+        resp = requests.get(f'{base_url}?page={page + 1}&per_page={limit}', headers=HEADERS)
+        comment_list += list(resp.json())
     print(f'\t Retrived {len(comment_list)} comments of issue[{issue["number"]}]')
     for i, comment in enumerate(sorted(comment_list, key=lambda x: x['id'])):
         comment['number'] = i + 1
