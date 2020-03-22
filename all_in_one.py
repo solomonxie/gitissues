@@ -92,7 +92,7 @@ def download_comments(issue):
     count, limit = issue['comments'], 30
     pages = int((count + abs(count % limit - limit)) / limit)
     # Pagination
-    for page in range(0, pages, limit):
+    for page in range(0, pages):
         resp = requests.get(f'{base_url}?page={page + 1}&per_page={limit}', headers=HEADERS)
         comment_list += list(resp.json())
     print(f'\t Retrived {len(comment_list)} comments of issue[{issue["number"]}]')
