@@ -59,17 +59,16 @@ def publish_bak_repo():
     p = os.popen(f'git -C {ROOT} add {ROOT}')
     print(p.read())
 
-    changed_titles = []
     p = os.popen(f'git -C {ROOT} diff master --name-only |cat')
     changed_files = p.read().split()
     print(f'Changed files: {changed_files}')
-    for i, fname in enumerate(changed_files):
-        changed_titles.append(f'[ {i+1} ] ' + fname[:20])
-    commit_msg = '...; '.join(changed_titles)[:30]
-    print(f'Updated: {commit_msg}')
+    titles = [f'[ {i+1} ] ' + fname[:20] for i, fname in enumerate(changed_files)]
+    changed_titles = '...; '.join(titles)
+    print(f'Updated: {changed_titles}')
+    commit_msg = f'Auto-sync Updated {len(changed_files)} files: {changed_titles}'[:50]
 
     print('Pushing backup-repo...')
-    p = os.popen(f'git -C {ROOT} commit -am "Auto-sync Updated {len(changed_files)} files"')
+    p = os.popen(f'git -C {ROOT} commit -am "{commit_msg}"')
     print(p.read())
     p = os.popen(f'git -C {ROOT} push --force origin master')
     print(p.read())
