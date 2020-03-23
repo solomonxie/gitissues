@@ -56,6 +56,9 @@ def publish_bak_repo():
     shutil.move(CACHE, BLOG)
     print('Replaced existing files with newly retrieved files')
 
+    p = os.popen(f'git -C {ROOT} add {ROOT}')
+    print(p.read())
+
     changed_titles = []
     p = os.popen(f'git -C {ROOT} diff master --name-only |cat')
     changed_files = p.read().split()
@@ -66,8 +69,6 @@ def publish_bak_repo():
     print(f'Updated: {commit_msg}')
 
     print('Pushing backup-repo...')
-    p = os.popen(f'git -C {ROOT} add {ROOT}')
-    print(p.read())
     p = os.popen(f'git -C {ROOT} commit -am "Auto-sync Updated {len(changed_files)} files"')
     print(p.read())
     p = os.popen(f'git -C {ROOT} push --force origin master')
