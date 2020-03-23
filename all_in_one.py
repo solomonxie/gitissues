@@ -57,7 +57,7 @@ def publish_bak_repo():
     print('Replaced existing files with newly retrieved files')
 
     changed_titles = []
-    p = os.popen(f'git -C {ROOT} diff --name-only |cat')
+    p = os.popen(f'git -C {ROOT} diff master --name-only |cat')
     changed_files = p.read().split()
     print(f'Changed files: {changed_files}')
     for i, fname in enumerate(changed_files):
