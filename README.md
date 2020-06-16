@@ -20,3 +20,9 @@ Stable brances are as snapshots for properly working versions.
 ```sh
 make build && make run && make into
 ```
+
+
+## Architecture
+
+Docker build --> generate credentials into envfile --> docker run with envfile --> docker cmd entry -->
+crontab -> all_in_one.py
